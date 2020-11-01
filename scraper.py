@@ -4,6 +4,7 @@ import urllib
 import json
 import time
 import sqlite3
+import pandas as pd
 
 class clarin():
     def __init__(self):
@@ -58,7 +59,7 @@ class clarin():
         for x in boxs[:9]:
             reqs.append(r.get(x))
             #para evitar ban pongo pausa
-            time.sleep(0.2)
+            time.sleep(0.3)
 
         box0=json.loads(reqs[0].content.decode().strip('()'))['data']
         sopa0=bs(box0,features="lxml")
@@ -95,8 +96,6 @@ def get(lista):
             try:
                 art.get(u)
                 time.sleep(0.2)
-                #print(j,u)
-                #print('ok')
                 arts.append(art)
             except:
                 print(j,u)
