@@ -6,6 +6,7 @@ import time
 import sqlite3 as sql
 import pandas as pd
 import unicodedata
+from tqdm import tqdm
 
 
 df=pd.read_csv('p12_2010.csv')
@@ -25,7 +26,7 @@ class p12():
         self.url=url
 
 data=[]
-for x in df.urls[:20]:
+for i,x in enumerate(tqdm(df.urls[:20])):
     nota=p12()
     try:
         nota.get(x)
