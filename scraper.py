@@ -6,8 +6,10 @@ import time
 import sqlite3 as sql
 import pandas as pd
 import unicodedata
+from tqdm import tqdm
 
-data=pd.read_csv('p12_2010.csv')
+
+df=pd.read_csv('p12_2010.csv')
 
 class p12():
     
@@ -24,7 +26,7 @@ class p12():
         self.url=url
 
 data=[]
-for x in urls[:100]:
+for i,x in enumerate(tqdm(df.urls[:20])):
     nota=p12()
     try:
         nota.get(x)
@@ -34,7 +36,7 @@ for x in urls[:100]:
     time.sleep(0.2)
     
     
-df=pd.DataFrame.from_records(data,columns=['volanta','titulo','bajada','cuerpo','url'])
+df2=pd.DataFrame.from_records(data,columns=['volanta','titulo','bajada','cuerpo','url'])
 
 con = sqlite3.connect('data.sqlite')
-df.to_sql('data', con)
+df2.to_sql('data', con)
