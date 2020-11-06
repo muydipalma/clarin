@@ -6,6 +6,7 @@ import time
 import sqlite3 as sql
 import pandas as pd
 import unicodedata
+import tqdm
 from tqdm import tqdm
 
 
