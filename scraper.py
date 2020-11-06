@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup as bs
 import urllib
 import json
 import time
-import sqlite3 as sql
+import sqlite3
 import pandas as pd
 import unicodedata
 from tqdm import tqdm
