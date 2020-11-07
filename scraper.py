@@ -26,7 +26,7 @@ class p12():
         self.url=url
 
 data=[]
-for x in df.urls[]:
+for x in df.urls:
     nota=p12()
     try:
         nota.get(x)
