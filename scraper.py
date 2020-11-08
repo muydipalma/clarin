@@ -31,7 +31,7 @@ for z in range(5):
     for y in range(13):
         for x in range(32):
             try:
-                year=2012+k
+                year=2012+z
                 url='https://www.pagina12.com.ar/diario/secciones/index-'+str(year)+'-'+str(y)+'-'+str(x)+'.html'
                 req=r.get(url)
                 sopa=bs(req.content)
