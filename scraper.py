@@ -43,7 +43,8 @@ for z in range(5):
         time.sleep(0.2)          
     time.sleep(0.2)
 
-data=[]
+print('len urls: ',len(urls))    
+
 for x in urls:
     nota=p12()
     try:
