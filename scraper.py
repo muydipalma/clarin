@@ -50,7 +50,7 @@ for x in urls:
     try:
         nota.get(x)
         row=[nota.volanta,nota.titulo,nota.bajada,nota.cuerpo,nota.url]
-        c.execute('insert into data2 values (?,?,?,?,?)', row)
+        c.execute('insert into data values (?,?,?,?,?)', row)
         con.commit()        
     except:
         pass
