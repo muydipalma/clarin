@@ -9,6 +9,7 @@ import unicodedata
 
 
 
+
 df=pd.read_csv('p12_2011.csv')
 
 class p12():
@@ -24,9 +25,27 @@ class p12():
         self.bajada=unicodedata.normalize("NFKD",sopa.find('p',{'class':'intro'}).get_text(strip=True))
         self.cuerpo=unicodedata.normalize("NFKD",sopa.find('div',{'id':'cuerpo'}).get_text(strip=True))
         self.url=url
+        
+        
+urls=[]
+for z in range(5):
+    for y in range(13):
+        for x in range(32):
+            try:
+                year=2012+k
+                url='https://www.pagina12.com.ar/diario/secciones/index-'+str(year)+'-'+str(y)+'-'+str(x)+'.html'
+                req=r.get(url)
+                sopa=bs(req.content)
+                for x in sopa.find('div',{'class':"columna476 left12"}).find_all('li'):
+                    urls.append(uri+x.find('a').get('href'))
+            except:
+                pass
+            time.sleep(1)
+        time.sleep(1)          
+    time.sleep(1)
 
 data=[]
-for x in df.urls:
+for x in urls:
     nota=p12()
     try:
         nota.get(x)
@@ -35,6 +54,8 @@ for x in df.urls:
         pass
     time.sleep(0.2)
     
+
+
     
 df2=pd.DataFrame.from_records(data,columns=['volanta','titulo','bajada','cuerpo','url'])
 
