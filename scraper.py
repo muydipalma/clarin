@@ -25,6 +25,7 @@ class p12():
 con = sqlite3.connect('data.sqlite')
 c = con.cursor()
 c.execute("""CREATE TABLE IF NOT EXISTS data (volanta, titulo, bajada,cuerpo,url)""")        
+uri='https://www.pagina12.com.ar'
 
 urls=[]
 for z in range(5):
@@ -35,8 +36,8 @@ for z in range(5):
                 url='https://www.pagina12.com.ar/diario/secciones/index-'+str(year)+'-'+str(y)+'-'+str(x)+'.html'
                 req=r.get(url)
                 sopa=bs(req.content)
-                for x in sopa.find('div',{'class':"columna476 left12"}).find_all('li'):
-                    urls.append(uri+x.find('a').get('href'))
+                for art in sopa.find('div',{'class':"columna476 left12"}).find_all('li'):
+                    urls.append(uri+art.find('a').get('href'))
             except:
                 pass
             time.sleep(0.2)
