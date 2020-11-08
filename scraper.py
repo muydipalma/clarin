@@ -8,10 +8,6 @@ import pandas as pd
 import unicodedata
 
 
-
-
-df=pd.read_csv('p12_2011.csv')
-
 class p12():
     
     def __init__(self):
@@ -25,8 +21,11 @@ class p12():
         self.bajada=unicodedata.normalize("NFKD",sopa.find('p',{'class':'intro'}).get_text(strip=True))
         self.cuerpo=unicodedata.normalize("NFKD",sopa.find('div',{'id':'cuerpo'}).get_text(strip=True))
         self.url=url
-        
-        
+
+co = sqlite3.connect('data.sqlite')
+c = con.cursor()
+c.execute("""CREATE TABLE IF NOT EXISTS data (volanta, titulo, bajada,cuerpo,url)""")        
+
 urls=[]
 for z in range(5):
     for y in range(13):
@@ -40,24 +39,20 @@ for z in range(5):
                     urls.append(uri+x.find('a').get('href'))
             except:
                 pass
-            time.sleep(1)
-        time.sleep(1)          
-    time.sleep(1)
+            time.sleep(0.2)
+        time.sleep(0.2)          
+    time.sleep(0.2)
 
 data=[]
 for x in urls:
     nota=p12()
     try:
         nota.get(x)
-        data.append([nota.volanta,nota.titulo,nota.bajada,nota.cuerpo,nota.url])
+        row=[nota.volanta,nota.titulo,nota.bajada,nota.cuerpo,nota.url]
+        c.execute('insert into data2 values (?,?,?,?,?)', row)
+        con.commit()        
     except:
         pass
     time.sleep(0.2)
     
 
-
-    
-df2=pd.DataFrame.from_records(data,columns=['volanta','titulo','bajada','cuerpo','url'])
-
-con = sqlite3.connect('data.sqlite')
-df2.to_sql('data', con)
