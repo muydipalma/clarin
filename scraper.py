@@ -22,7 +22,7 @@ class p12():
         self.cuerpo=unicodedata.normalize("NFKD",sopa.find('div',{'id':'cuerpo'}).get_text(strip=True))
         self.url=url
 
-co = sqlite3.connect('data.sqlite')
+con = sqlite3.connect('data.sqlite')
 c = con.cursor()
 c.execute("""CREATE TABLE IF NOT EXISTS data (volanta, titulo, bajada,cuerpo,url)""")        
 
